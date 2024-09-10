@@ -18,8 +18,8 @@ void ajout(){
 
 char w;
   //ecrire les donnees de etudiant //
- q=0;
-     do{
+q=0;
+do{
     printf("________________________________________________________________________________________________________\n");
     printf("_______________________________________ ajoute de etudiant N :%d ______________________________________\n",q+1);
  //ajoute le nom d etudiant //
@@ -46,14 +46,29 @@ char w;
         printf("Voulez-vous ajouter un etudiant?(y/n) :");
         scanf("%c",&w);
         q++;     
-
 }while(w=='y');
   //finir la fonction d ajoute//
 }
 // fonction modification d un etudiant //
 void modification(){
-   //declarer les variables global//
-    int e,r;
+//declarer les variables global//
+    int e,r,t;
+    printf("Veuillez entrer l identifiant unique:");
+    scanf("%d ",&r);
+    printf("________________________________________________________________________________________________________\n");
+for(e=0;e<q;e++){
+      if(r==c[e].id){
+printf("________________________________________________________________________________________________________\n");
+    printf("_______________________________________ modification  etudiant N :%d ______________________________________\n",c[e].id);
+    printf("1)modifier le nom                                                                 2)modifier le prenom \n");
+    printf("3)modifier le departement                                                         4)modifier la note generale \n");
+    printf("                                        5)modifier la date de naissance \n");
+    printf("entre :");
+    scanf("%d",&t);
+    
+
+      }
+    }
 
 }
 
