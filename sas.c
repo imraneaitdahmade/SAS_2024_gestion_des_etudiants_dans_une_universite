@@ -12,7 +12,6 @@ typedef struct
 } eleve;
 // declaration des variables global //
 eleve c[100];
-
 int q;
 // la fonction d ajoute//
 void ajout()
@@ -39,7 +38,7 @@ void ajout()
               getchar();
               fgets(c[q].date, 20, stdin);
               // ajoute le departement d etudiant //
-              printf("entre votre departement :");
+              printf("entre votre departement one 4 dapartement (MIP,PC,IN,BIO) :");
               getchar();
               fgets(c[q].departement, 20, stdin);
               // ajoute la note general d etudiant//
@@ -62,7 +61,7 @@ void modification()
        char nevnom[20],nevprenom[20],nevdate[20],nevdepartement[20];
        float nevnote;
        printf("Veuillez entrer l identifiant unique:");
-       scanf("%d ", &r);
+       scanf("%d",&r);
        printf("________________________________________________________________________________________________________\n");
        for (e = 0; e < q; e++)
        {
@@ -117,16 +116,16 @@ void modification()
 }
 /// fonction de suprimer //
 void suprimer(){
-       // declaration des variables local de fonction suprimer//
+ // declaration des variables local de fonction suprimer//
        int y,i;
        char u;
-       //demande a l utilisateur de entre l identifiant unique//
+//demande a l utilisateur de entre l identifiant unique//
        printf("Veuillez entrer l identifiant unique:");
        scanf("%d",&y);
        printf("Es-tu sur?(y/n)");
        scanf("%c",&u);
        if(u=='y'){
-              i=0;
+            
 
 
        }      
@@ -141,14 +140,48 @@ for(o=0;o<q;o++){
      printf("le prenom est :%s \n",c[o].prenom);
      printf("le date de naissance est :%s \n",c[o].date);
      printf("la departement :%s \n",c[o].departement);
-     printf("le nombre total:%s \n",c[o].note);
+     printf("le nombre total:%.2f\n",c[o].note);
      
 }
 }
 //fonction de calculer la moyene general
+void moyenne(){
+      int p,a,d,f;
+      f=0;
+       float s,M;
+       char moydepartement[5];
+       s=0;
+       printf("________________________________________________________________________________________________________\n");
+       printf("_____________________________________calculer le moyenne general ________________________________________\n");
+       printf("1)la moyenne generale de specifique departement                     2)la moyenne general de l université entiere.\n");
+       printf("entre :");
+       scanf("%d",&p);
+if(p==2){{
+            for(a=0;a<q;a++){
+              s=s+c[a].note;
+            }
+            M=s/q;
+       printf("le moyenne generale des etudiant dans l universite est :%.0f",M);
+       }    
+}
+else if(p==1){
+       printf("entre le nom de  depatement qui vouler:");
+       scanf("%s",moydepartement);
+       for(d=0;d<q;d++){
+       if(strcmp(c[d].departement,moydepartement)==0){
+              s=s+c[d].note;
+              f++;
+       }
+       }
+       M=s/f;
+       printf("le moyenne general dans la departement %s est %.0f",moydepartement,M);
+
+     }
+}
 int main()
 {
        ajout();
+       modification();
        affichage();
 
        return 0;
