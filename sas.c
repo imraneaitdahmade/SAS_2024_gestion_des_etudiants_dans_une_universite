@@ -67,7 +67,7 @@ void ajout()
        } while (w == 'y');
        // finir la fonction d ajoute//
 }
-       // fonction modification d un etudiant //
+ // fonction modification d un etudiant //
 void modification()
 {
        // declarer les variables global//
@@ -153,23 +153,28 @@ void suprimer(){
        printf("Es-tu sur?(y/n):");
        scanf("%s",&u);
        if(u=='y'){
-       for(i=0;i<q;i++){
-              if(strcpy(y,c[i].id)==0){
-                     for(o=i;o<q;o++){
-                     c[o]=c[o+1];
-       
+       for(i=0;i<=q;i++){
+              if(strcmp(c[i].id,y)==0){
+                     for(o=i;o<q-1;o++){
+                     strcpy(c[o].id,c[o+1].id);
+                     strcpy(c[o].nom,c[o+1].nom);
+                     strcpy(c[o].prenom,c[o+1].prenom);
+                     strcpy(c[o].date,c[o+1].date);
+                     strcpy(c[o].departement,c[o+1].departement);
+                     c[o].note=c[o+1].note;
                      }  
+                     q--;
               }
        }
-       printf("Les informations d etudiant  ont ete supprimees ");
+       printf("Les informations d etudiant  ont ete supprimees . \n");
        } 
        else 
-       printf("ce etudiant n existe pas");     
+       printf("ce etudiant n existe pas.");     
 }
 //fonction de l affichage
 void affichage(){
 int o;
-       
+
 for(o=0;o<q;o++){
      printf("les informationsde eleve id:%s \n",c[o].id);
      printf("le nom est :%s \n",c[o].nom);
@@ -262,8 +267,35 @@ void recherche(){
      }
        printf("________________________________________________________________________________________________________\n");
 }
+//fonction des statistiques
+void statistique(){
+      int t;
+       printf("________________________________________________________________________________________________________\n");
+                     printf("_______________________________________ statistiques des informations  ______________________________________\n");
+                     printf("1)modif                                                                 2)modifier le prenom \n");
+                     printf("3)modifier le departement                                                         4)modifier la note generale \n");
+                     printf("                                        5)modifier la date de naissance \n");
+                     printf("entre :");
+                     scanf("%d",&t);
+}
+void tri(){
+       int i,j,e;
+       eleve temp;
+       
+       for(i=0;i<q;i++){
+              for(j=0;j<q-i-1;j++){
+                     if(strcmp(c[j].nom,c[j+1].nom)>0){
+                       temp=c[j];
+                       c[j]=c[j+1];
+                       c[j+1]=temp;
+                     }
+              }
+       }
+       for(e=0;e<q;e++){
+              printf("%s",c[e].nom);
+       }
 
-
+}
 int main()
 {
         //declaration des variables local de main1
@@ -327,6 +359,7 @@ int main()
         else
         break;
         case 6:
+        tri();
           printf("click 1 pour retourne au menu \n click 2 pour finir le programme\n ");
         printf("entre :");
         scanf("%d",&h);
