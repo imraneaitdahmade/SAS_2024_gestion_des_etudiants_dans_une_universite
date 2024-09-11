@@ -3,7 +3,7 @@
 // structure des donnees d etudiant //
 typedef struct
 {
-       int id;
+       char id[10];
        char nom[20];
        char prenom[20];
        char date[20];
@@ -13,7 +13,7 @@ typedef struct
 // declaration des variables global //
 eleve c[100];
  const char listdpar[6][6]={"MIP","PC","IN","BIO"};
-int q;
+int q=0;
 // la fonction d ajoute//
 void ajout()
 {
@@ -22,12 +22,13 @@ void ajout()
        char w;
        // ecrire les donnees de etudiant //
        q = 0;
-v=0;
        do
        {
               printf("________________________________________________________________________________________________________\n");
               printf("_______________________________________ ajoute de etudiant N :%d ______________________________________\n", q + 1);
               // ajoute le nom d etudiant //
+              printf("entre le ID d etudiant :");
+              scanf("%s",c[q].id);
               printf("entre le nom d etudiant :");
               getchar();
               fgets(c[q].nom, 20, stdin);
@@ -62,8 +63,6 @@ v=0;
               // pour donner le choix a lutilisateur d entre un autre etudiant//
               printf("Voulez-vous ajouter un autre etudiant?(y/n) :");
               scanf("%s",&w);
-             v++;
-             c[q].id=v;
                q++;
        } while (w == 'y');
        // finir la fonction d ajoute//
@@ -72,19 +71,20 @@ v=0;
 void modification()
 {
        // declarer les variables global//
-       int e, r, t,x;
+       int e,t,x;
+       char r[10];
        char nevnom[20],nevprenom[20],nevdate[20];
        float nevnote;
        printf("Veuillez entrer l identifiant unique:");
-       scanf("%d",&r);
+       scanf("%s",r);
        printf("________________________________________________________________________________________________________\n");
        for (e = 0; e < q; e++)
        {
-              if (r == c[e].id)
+              if (strcmp(r,c[e].id)==0)
               {
 //menu de modification des informations d etudiant
                      printf("________________________________________________________________________________________________________\n");
-                     printf("_______________________________________ modification  etudiant N :%d ______________________________________\n",c[e].id);
+                     printf("_______________________________________ modification  des informations ______________________________________\n");
                      printf("1)modifier le nom                                                                 2)modifier le prenom \n");
                      printf("3)modifier le departement                                                         4)modifier la note generale \n");
                      printf("                                        5)modifier la date de naissance \n");
@@ -144,25 +144,34 @@ void modification()
 /// fonction de suprimer //
 void suprimer(){
  // declaration des variables local de fonction suprimer//
-       int y,i;
+       int i,o;
+       char y[10];
        char u;
 //demande a l utilisateur de entre l identifiant unique//
        printf("Veuillez entrer l identifiant unique:");
-       scanf("%d",&y);
-       printf("Es-tu sur?(y/n)");
-       scanf("%c",&u);
+       scanf("%s",y);
+       printf("Es-tu sur?(y/n):");
+       scanf("%s",&u);
        if(u=='y'){
-            
-
-
-       }      
+       for(i=0;i<q;i++){
+              if(strcpy(y,c[i].id)==0){
+                     for(o=i;o<q;o++){
+                     c[o]=c[o+1];
+       
+                     }  
+              }
+       }
+       printf("Les informations d etudiant  ont ete supprimees ");
+       } 
+       else 
+       printf("ce etudiant n existe pas");     
 }
 //fonction de l affichage
 void affichage(){
 int o;
        
 for(o=0;o<q;o++){
-     printf("les informationsde eleve id:%d \n",o+1)  ;
+     printf("les informationsde eleve id:%s \n",c[o].id);
      printf("le nom est :%s \n",c[o].nom);
      printf("le prenom est :%s \n",c[o].prenom);
      printf("le date de naissance est :%s \n",c[o].date);
@@ -253,10 +262,13 @@ void recherche(){
      }
        printf("________________________________________________________________________________________________________\n");
 }
+
+
 int main()
 {
         //declaration des variables local de main1
        int g,h;
+       
        //menu principal//
        menu:
        printf("______________________________________________________________________________________________________________\n");
@@ -323,8 +335,7 @@ int main()
         else
         break;
         case 7:
-
-         printf("click 1 pour retourne au menu \n click 2 pour finir le programme\n ");
+        printf("click 1 pour retourne au menu \n click 2 pour finir le programme\n ");
         printf("entre :");
         scanf("%d",&h);
         if(h==1)
