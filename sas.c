@@ -43,11 +43,11 @@ void ajout()
               getchar();
               fgets(c[q].departement, 20, stdin);
               // ajoute la note general d etudiant//
-              printf("entre la date de naissance  d etudiant :");
+              printf("entre la note  general :");
               scanf("%f",&c[q].note);
               // pour donner le choix a lutilisateur d entre un autre etudiant//
-              printf("Voulez-vous ajouter un etudiant?(y/n) :");
-              scanf("%c", &w);
+              printf("Voulez-vous ajouter un autre etudiant?(y/n) :");
+              scanf("%s",&w);
               q++;
               c[q].id= q;
        } while (w == 'y');
@@ -134,9 +134,15 @@ void suprimer(){
 //fonction de l affichage
 void affichage(){
 int o;
-       printf("id| le nom   | le prenom | le date de naissance |departement |note general|\n");
+       
 for(o=0;o<q;o++){
-       printf("%d |%s   |%s    |%s   |%s  |%.2f  ",c[o].id,c[o].nom,c[o].prenom,c[o].date,c[o].departement,c[o].note);
+     printf("les informationsde eleve id:%d",o+1)  ;
+     printf("le nom est :%s \n",c[o].nom);
+     printf("le prenom est :%s \n",c[o].prenom);
+     printf("le date de naissance est :%s \n",c[o].date);
+     printf("la departement :%s \n",c[o].departement);
+     printf("le nombre total:%s \n",c[o].note);
+     
 }
 }
 //fonction de calculer la moyene general
