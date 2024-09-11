@@ -12,16 +12,17 @@ typedef struct
 } eleve;
 // declaration des variables global //
 eleve c[100];
- const char listdpar[6][6]={"MIP","PC","BIO","IN"};
+ const char listdpar[6][6]={"MIP","PC","IN","BIO"};
 int q;
 // la fonction d ajoute//
 void ajout()
 {
        // declaration des variables local  en fonction d ajoute//
-
+       int z,v;
        char w;
        // ecrire les donnees de etudiant //
        q = 0;
+v=0;
        do
        {
               printf("________________________________________________________________________________________________________\n");
@@ -39,27 +40,40 @@ void ajout()
               getchar();
               fgets(c[q].date, 20, stdin);
               // ajoute le departement d etudiant //
-              printf("entre votre departement one 4 dapartement (MIP,PC,IN,BIO) :");
-              getchar();
-              fgets(c[q].departement, 20, stdin);
+              printf("entre votre departement ona 4 dapartement click le numero correspondant [1)MIP,2)PC,3)IN,4)BIO] :");
+              scanf("%d",&z);
+              switch(z){
+                     case 1:
+                     strcpy(c[q].departement,listdpar[0]);
+                     break;
+                      case 2:
+                     strcpy(c[q].departement,listdpar[1]);
+                     break;
+                      case 3:
+                     strcpy(c[q].departement,listdpar[2]);
+                     break;
+                      case 4:
+                     strcpy(c[q].departement,listdpar[3]);
+                     break;
+              }
               // ajoute la note general d etudiant//
               printf("entre la note  general :");
               scanf("%f",&c[q].note);
               // pour donner le choix a lutilisateur d entre un autre etudiant//
               printf("Voulez-vous ajouter un autre etudiant?(y/n) :");
               scanf("%s",&w);
-              q++;
-              c[q].id= q;
+             v++;
+             c[q].id=v;
+               q++;
        } while (w == 'y');
-
        // finir la fonction d ajoute//
 }
        // fonction modification d un etudiant //
 void modification()
 {
        // declarer les variables global//
-       int e, r, t;
-       char nevnom[20],nevprenom[20],nevdate[20],nevdepartement[20];
+       int e, r, t,x;
+       char nevnom[20],nevprenom[20],nevdate[20];
        float nevnote;
        printf("Veuillez entrer l identifiant unique:");
        scanf("%d",&r);
@@ -70,7 +84,7 @@ void modification()
               {
 //menu de modification des informations d etudiant
                      printf("________________________________________________________________________________________________________\n");
-                     printf("_______________________________________ modification  etudiant N :%d ______________________________________\n", c[e].id);
+                     printf("_______________________________________ modification  etudiant N :%d ______________________________________\n",c[e].id);
                      printf("1)modifier le nom                                                                 2)modifier le prenom \n");
                      printf("3)modifier le departement                                                         4)modifier la note generale \n");
                      printf("                                        5)modifier la date de naissance \n");
@@ -82,34 +96,46 @@ void modification()
                      printf("entre le nom:");
                      getchar();
                      fgets(nevnom,20,stdin);
-                     strcpy(nevnom,c[e].nom);
+                     strcpy(c[e].nom,nevnom);
               break;
 //modification de prenom//
                      case 2:
                      printf("entre le  prenom:");
                      getchar();
                      fgets(nevprenom,20,stdin);
-                     strcpy(nevprenom,c[e].prenom);
+                     strcpy(c[e].prenom,nevprenom);
               break;
 //modification de date de naissance//
                      case 5:
                      printf("entre la date de naissance:");
                      getchar();
                      fgets(nevdate,20,stdin);
-                     strcpy(nevdate,c[e].date);
+                     strcpy(c[e].date,nevdate);
               break;
 // modification de la departement
                      case 3:
-                     printf("entre le  departement:");
-                     getchar();
-                     fgets(nevdepartement,20,stdin);
-                     strcpy(nevdepartement,c[e].departement);
+                     printf("entre votre departement ona 4 dapartement click le numero correspondant [1)MIP,2)PC,3)IN,4)BIO]:");
+                     scanf("%d",&x);
+                     switch(x){
+                     case 1:
+                     strcpy(c[e].departement,listdpar[0]);
+                     break;
+                      case 2:
+                     strcpy(c[e].departement,listdpar[1]);
+                     break;
+                      case 3:
+                     strcpy(c[e].departement,listdpar[2]);
+                     break;
+                      case 4:
+                     strcpy(c[e].departement,listdpar[3]);
+                     break;
+              }
               break;
 //modification de note general//
                      case 4:
                       printf("entre la note :");
                       scanf("%f",&nevnote);
-                     c[e].note==nevnote;
+                     c[e].note=nevnote;
               break;
               }
        }
@@ -136,7 +162,7 @@ void affichage(){
 int o;
        
 for(o=0;o<q;o++){
-     printf("les informationsde eleve id:%d",o+1)  ;
+     printf("les informationsde eleve id:%d \n",o+1)  ;
      printf("le nom est :%s \n",c[o].nom);
      printf("le prenom est :%s \n",c[o].prenom);
      printf("le date de naissance est :%s \n",c[o].date);
@@ -162,7 +188,8 @@ if(p==2){{
               s=s+c[a].note;
             }
             M=s/q;
-       printf("le moyenne generale des etudiant dans l universite est :%.0f",M);
+       printf("le moyenne generale des etudiant dans l universite est :%.0f \n",M);
+        printf("________________________________________________________________________________________________________\n");
        }    
 }
 else if(p==1){
@@ -176,7 +203,8 @@ else if(p==1){
        }
        }
        M=s/f;
-       printf("le moyenne general dans la departement %s est %f",moydepartement,M);
+       printf("le moyenne general dans la departement %s est %.0f \n",moydepartement,M);
+         printf("________________________________________________________________________________________________________\n");
      }
 }
 //fonction de recherche //
@@ -185,10 +213,10 @@ void recherche(){
      int j,k,l;
      char rechname[20],rechdepartement[20] ;
      //menu de recherche//
-     printf("______________________________________________________________________________________________________________\n");
-     printf("--------------------------------------------------rechercher--------------------------------------------------\n");
-     printf("   1)recherche  un etudiant par son nom                         2)Afficher la liste des etudiants  inscrits dans un departement spécifique\n \n");
-     printf("______________________________________________________________________________________________________________\n");
+     printf("_____________________________________________________________________________________________________________________________________________\n");
+     printf("--------------------------------------------------rechercher---------------------------------------------------------------------------------\n");
+     printf("   1)recherche  un etudiant par son nom                         2)Afficher la liste des etudiants  inscrits dans un departement specifique\n \n");
+     printf("______________________________________________________________________________________________________________________________________________\n");
      printf("entre :");
      scanf("%d",&j);
      switch(j){
@@ -197,8 +225,8 @@ void recherche(){
        getchar();
        fgets(rechname, 20, stdin);
        for(k=0;k<q;k++){
-              if(strcmp(rechname,c[k].nom)){
-       printf("les informationsde eleve id:%d",k+1)  ;
+              if(strcmp(rechname,c[k].nom)==0){
+       printf("les informationsde eleve id:%d \n",k+1)  ;
        printf("le nom est :%s \n",c[k].nom);
        printf("le prenom est :%s \n",c[k].prenom);
        printf("le date de naissance est :%s \n",c[k].date);
@@ -210,8 +238,8 @@ void recherche(){
        case 2:
        printf("entre le departement :");
        scanf("%s",rechdepartement);
-       for(l=0;l<q;l++){
-       if(strcmp(rechdepartement,c[l].departement)){
+       for(l=0;l<=q;l++){
+       if(strcmp(rechdepartement,c[l].departement)==0){
        printf("les eleves de departement %s sont :\n",rechdepartement);
        printf("les informationsde eleve id:%d \n",l+1)  ;
        printf("le nom est :%s \n",c[l].nom);
@@ -219,14 +247,15 @@ void recherche(){
        printf("le date de naissance est :%s \n",c[l].date);
        printf("la departement :%s \n",c[l].departement);
        printf("le nombre total:%.2f\n",c[l].note);
+       }
+       }
        break;
-       }
-       }
      }
+       printf("________________________________________________________________________________________________________\n");
 }
 int main()
 {
-       //declaration des variables local de main
+        //declaration des variables local de main1
        int g,h;
        //menu principal//
        menu:
