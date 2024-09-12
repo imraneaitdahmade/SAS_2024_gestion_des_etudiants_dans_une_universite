@@ -14,6 +14,40 @@ typedef struct
 eleve c[100];
  const char listdpar[6][6]={"MIP","PC","IN","BIO"};
 int q=10;
+
+
+
+// Fonction pour initialiser des données d'étudiants
+void initialiserDonnees() {
+    // Initialisation de quelques étudiants avec des données prédéfinies
+    strcpy(c[0].id, "E001");
+    strcpy(c[0].nom, "Dupont");
+    strcpy(c[0].prenom, "Jean");
+    strcpy(c[0].date, "01/01/2000");
+    c[0].note = 12.5;
+    strcpy(c[0].departement, "MIP");
+
+    strcpy(c[1].id, "E002");
+    strcpy(c[1].nom, "Durand");
+    strcpy(c[1].prenom, "Marie");
+    strcpy(c[1].date, "02/02/2001");
+    c[1].note = 15.0;
+    strcpy(c[1].departement, "PC");
+
+    strcpy(c[2].id, "E003");
+    strcpy(c[2].nom, "Martin");
+    strcpy(c[2].prenom, "Pierre");
+    strcpy(c[2].date, "03/03/2002");
+    c[2].note = 9.0;
+    strcpy(c[2].departement, "IN");
+
+    // Mettre à jour le nombre d'étudiants initialisés
+    q = 3;
+}
+
+
+
+
 // la fonction d ajoute//
 void ajout()
 {
@@ -28,6 +62,7 @@ void ajout()
               printf("_______________________________________ ajoute de etudiant N :%d ______________________________________\n", q + 1);
               // ajoute le nom d etudiant //
               printf("entre le ID d etudiant :");
+       
               scanf("%s",c[q].id);
               printf("entre le nom d etudiant :");
               getchar();
@@ -162,8 +197,9 @@ void suprimer(){
                      strcpy(c[o].date,c[o+1].date);
                      strcpy(c[o].departement,c[o+1].departement);
                      c[o].note=c[o+1].note;
-                     }  
-                     q--;
+                     } 
+                     q--; 
+                     
               }
        }
        printf("Les informations d etudiant  ont ete supprimees . \n");
@@ -176,13 +212,14 @@ void affichage(){
 int o;
 
 for(o=0;o<q;o++){
-    // printf("les informations de eleve \nid:%s \n",c[o].id);
+     printf("les informations de eleve  %d",o+1);
      printf("le id est :%s \n",c[o].id);
      printf("le nom est :%s \n",c[o].nom);
      printf("le prenom est :%s \n",c[o].prenom);
      printf("le date de naissance est :%s \n",c[o].date);
      printf("la departement :%s \n",c[o].departement);
      printf("le nombre total:%.2f\n",c[o].note);  
+     printf("____________________________________________\n");
        }
 }
 //fonction de calculer la moyene general
@@ -240,12 +277,13 @@ void recherche(){
        fgets(rechname, 20, stdin);
        for(k=0;k<q;k++){
               if(strcmp(rechname,c[k].nom)==0){
-       printf("les informationsde eleve id:%d \n",k+1)  ;
+       printf("les informationsde eleve id:%s \n",c[l].id);
        printf("le nom est :%s \n",c[k].nom);
        printf("le prenom est :%s \n",c[k].prenom);
        printf("le date de naissance est :%s \n",c[k].date);
        printf("la departement :%s \n",c[k].departement);
        printf("le nombre total:%.2f\n",c[k].note);
+       printf("______________________________________________");
               }
 }
        break;
@@ -255,12 +293,13 @@ void recherche(){
        for(l=0;l<=q;l++){
        if(strcmp(rechdepartement,c[l].departement)==0){
        printf("les eleves de departement %s sont :\n",rechdepartement);
-       printf("les informationsde eleve id:%d \n",l+1)  ;
+       printf("les informationsde eleve id:%s \n",c[l].id);
        printf("le nom est :%s \n",c[l].nom);
        printf("le prenom est :%s \n",c[l].prenom);
        printf("le date de naissance est :%s \n",c[l].date);
        printf("la departement :%s \n",c[l].departement);
        printf("le nombre total:%.2f\n",c[l].note);
+       printf("______________________________________\n");
        }
        }
      }
@@ -416,18 +455,10 @@ int main()
 {
         //declaration des variables local de main1
        int g,h;
-    c[0] = (eleve){"G134595302","Dupont", "Jean", "01/01/2000", 15.5, "MIP"};
-    c[1] = (eleve){"G134367543", "Martin", "Sophie", "02/02/1999", 17.0, "PC"};
-    c[2] = (eleve){"G134565654", "Durand", "Claire", "03/03/2001", 14.0, "IN"};
-    c[3] = (eleve){"G134345681", "Lemoine", "Paul", "04/04/2002", 16.0, "IN"};
-    c[4] = (eleve){"G134688754", "Leroy", "Anne", "05/05/2000", 18.5, "BIO"};
-    c[5] = (eleve){"G131247423", "Gauthier", "Louis", "06/06/1998", 12.5, "PC"};
-    c[6] = (eleve){"G134545689", "Moreau", "Isabelle", "07/07/2001", 3.0, "MIP"};
-    c[7] = (eleve){"G134535737", "Boucher", "eric", "08/08/2002", 19.0, "MIP"};
-    c[8] = (eleve){"G134595431", "Roux", "Nathalie", "09/09/1999", 10.0, "PC"};
-    c[9] = (eleve){"G134599875", "Pires", "Julien", "10/10/2000", 9.5, "BIO"};
-       
-       //menu principal//
+  
+       initialiserDonnees();
+
+       //menu principal
        menu:
        printf("______________________________________________________________________________________________________________\n");
        printf("--------------------------------------gestion des etudiants dans une universite----------------------------\n");
