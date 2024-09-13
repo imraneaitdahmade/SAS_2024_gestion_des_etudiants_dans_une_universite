@@ -51,7 +51,6 @@ void initialiserDonnees() {
 // la fonction d ajoute//
 void ajout()
 {
-       // declaration des variables local  en fonction d ajoute//
        int z,v;
        char w;
        // ecrire les donnees de etudiant //
@@ -60,22 +59,21 @@ void ajout()
        {
               printf("________________________________________________________________________________________________________\n");
               printf("_______________________________________ ajoute de etudiant N :%d ______________________________________\n", q + 1);
-              // ajoute le nom d etudiant //
               printf("entre le ID d etudiant :");
        
               scanf("%s",c[q].id);
               printf("entre le nom d etudiant :");
               getchar();
               fgets(c[q].nom, 20, stdin);
-              // ajoute le prenom d etudiant //
+              
               printf("entre le prenom d etudiant :");
               getchar();
               fgets(c[q].prenom, 20, stdin);
-              // ajout le date de naissance//
+       
               printf("entre la date de naissance  d etudiant :");
               getchar();
               fgets(c[q].date, 20, stdin);
-              // ajoute le departement d etudiant //
+              
               printf("entre votre departement ona 4 dapartement click le numero correspondant click 1(MIP),2(PC),3(IN),4(BIO) :");
               scanf("%d",&z);
               switch(z){
@@ -92,20 +90,17 @@ void ajout()
                      strcpy(c[q].departement,listdpar[3]);
                      break;
               }
-              // ajoute la note general d etudiant//
               printf("entre la note  general :");
               scanf("%f",&c[q].note);
-              // pour donner le choix a lutilisateur d entre un autre etudiant//
+              
               printf("Voulez-vous ajouter un autre etudiant?(y/n) :");
               scanf("%s",&w);
                q++;
        } while (w == 'y');
-       // finir la fonction d ajoute//
 }
  // fonction modification d un etudiant //
 void modification()
 {
-       // declarer les variables global//
        int e,t,x;
        char r[10];
        char nevnom[20],nevprenom[20],nevdate[20];
@@ -126,28 +121,27 @@ void modification()
                      printf("entre :");
                      scanf("%d",&t);
               switch(t){
-//modification de nom//
                      case 1:
                      printf("entre le nom:");
                      getchar();
                      fgets(nevnom,20,stdin);
                      strcpy(c[e].nom,nevnom);
+                     printf("le modification a execute");
               break;
-//modification de prenom//
                      case 2:
                      printf("entre le  prenom:");
                      getchar();
                      fgets(nevprenom,20,stdin);
                      strcpy(c[e].prenom,nevprenom);
+                     printf("le modification a execute");
               break;
-//modification de date de naissance//
                      case 5:
                      printf("entre la date de naissance:");
                      getchar();
                      fgets(nevdate,20,stdin);
                      strcpy(c[e].date,nevdate);
+                     printf("le modification a execute");
               break;
-// modification de la departement
                      case 3:
                      printf("entre votre departement ona 4 dapartement click le numero correspondant [1)MIP,2)PC,3)IN,4)BIO]:");
                      scanf("%d",&x);
@@ -163,50 +157,59 @@ void modification()
                      break;
                       case 4:
                      strcpy(c[e].departement,listdpar[3]);
-                     break;
+                     break;printf("le modification a execute");
+
               }
               break;
-//modification de note general//
                      case 4:
                       printf("entre la note :");
                       scanf("%f",&nevnote);
                      c[e].note=nevnote;
+                     printf("le modification a execute");
               break;
               }
        }
 } 
 }
 /// fonction de suprimer //
-void suprimer(){
- // declaration des variables local de fonction suprimer//
-       int i,o;
-       char y[10];
-       char u;
-//demande a l utilisateur de entre l identifiant unique//
-       printf("Veuillez entrer l identifiant unique:");
-       scanf("%s",y);
-       printf("Es-tu sur?(y/n):");
-       scanf("%s",&u);
-       if(u=='y'){
-       for(i=0;i<=q;i++){
-              if(strcmp(c[i].id,y)==0){
-                     for(o=i;o<q-1;o++){
-                     strcpy(c[o].id,c[o+1].id);
-                     strcpy(c[o].nom,c[o+1].nom);
-                     strcpy(c[o].prenom,c[o+1].prenom);
-                     strcpy(c[o].date,c[o+1].date);
-                     strcpy(c[o].departement,c[o+1].departement);
-                     c[o].note=c[o+1].note;
-                     } 
-                     q--; 
-                     
-              }
-       }
-       printf("Les informations d etudiant  ont ete supprimees . \n");
-       } 
-       else 
-       printf("ce etudiant n existe pas.");     
+void suprimer() {
+    int i, o;
+    char y[10];
+    char u;
+
+    printf("Veuillez entrer l'identifiant unique : ");
+    scanf("%s", y);
+
+    printf("Es-tu sur ? (y/n) : ");
+    scanf(" %c", &u); 
+
+    if (u == 'y') {
+        for (i = 0; i < q; i++) {
+            if (strcmp(y, c[i].id) == 0) {
+
+                for (o = i; o < q - 1; o++) {
+                    strcpy(c[o].id, c[o + 1].id);
+                    strcpy(c[o].nom, c[o + 1].nom);
+                    strcpy(c[o].prenom, c[o + 1].prenom);
+                    strcpy(c[o].date, c[o + 1].date);
+                    strcpy(c[o].departement, c[o + 1].departement);
+                    c[o].note = c[o + 1].note;
+                }
+                q--;
+                break; 
+            }
+        }
+
+        if (i == q) {
+            printf("Cet etudiant n'existe pas.\n");
+        } else {
+            printf("Les informations de l'etudiant ont ete supprimees.\n");
+        }
+    } else {
+        printf("Aucune suppression effectuee.\n");
+    }
 }
+
 //fonction de l affichage
 void affichage(){
 int o;
@@ -320,7 +323,7 @@ int p,m,i,b;p=0;m=0;i=0;b=0;
        scanf("%d",&t);
        switch(t){
               case 1:
-              printf("le nombre total des etudiants est %d",q);
+              printf("le nombre total des etudiants est %d \n",q);
               break;
               case 2:
               for(a=0;a<=q;a++){
